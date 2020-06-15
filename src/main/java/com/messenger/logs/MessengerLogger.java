@@ -11,7 +11,9 @@ static PrintStream stream = null;
 public static void logInfo(String message) {
 	try {
 		if(stream == null) {
-		stream = new PrintStream(new File("C:\\Users\\prith\\Desktop\\Logs\\logs.txt"));
+		File file = new File("logs.txt");
+		stream = new PrintStream(file);
+		System.out.println("Log File Path ------->"+file.getAbsolutePath());
 		}
 		stream.append(message).println();
 	} catch (FileNotFoundException e) {
