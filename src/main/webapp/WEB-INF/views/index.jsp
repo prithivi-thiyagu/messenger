@@ -190,8 +190,10 @@ function checkPhnum(inputtxt)
   <a href="register" class="forgot">Sign Up</a>
   <input type="button" value="Generate OTP" onclick="generateOTP()">
   <input type="submit" value="Sign In">
+  <div><a href="rules" class="forgot"><b>Please Read Rules</b></a></div>
   </form>
 </div>
+
 <div class="shadow"></div>
 <div align="center" ><td><b>
 <%Object msg = request.getAttribute("errorMsg");

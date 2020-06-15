@@ -66,7 +66,7 @@ if(session==null)
 <div class="fixed-header">
 <div class="container">
             <nav>
-                <a href="loginValidate">Add</a>
+                <a href="addReceiver">Add</a>
                 <a href="viewUsers">View</a>
                 <a href="#">Delete</a>
                <a href="logout">Logout</a>

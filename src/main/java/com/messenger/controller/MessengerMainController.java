@@ -66,6 +66,7 @@ public class MessengerMainController  {
 				if(user!=null) {
 					otp = OTPGenerator.generateOTP(6);
 					user.setOtp(otp);
+					session.setAttribute("otp", otp);
 					user = regService.mergeCustomer(user);
 					}
 				if(user !=null && otp.equals(user.getOtp())) {
@@ -202,6 +203,7 @@ public class MessengerMainController  {
 	    String senderName = null;
 	    List<Message> msgList = null;
 		 String username = null;
+		 Optional<UserDetails> userOptionalVal = null;
 		try {
 			 session=request.getSession(false);
 			 userOptional = Optional.ofNullable(session.getAttribute("userName"));
@@ -218,6 +220,15 @@ public class MessengerMainController  {
 				 session.invalidate();
 				 return "index";
 			 }
+			 userOptionalVal = regService.getUserById(username);
+				
+				if(userOptionalVal.isPresent()) {
+					UserDetails user = userOptionalVal.get();
+					if(!otp.equals(user.getOtp())) {
+						session.invalidate();
+						return "index";
+					}
+				}
 			 	msgList = msgrService.getMessageById(username);
 			 	if(msgList!=null && !msgList.isEmpty()) {
 		    	request.setAttribute("msgList", msgList);
@@ -244,6 +255,51 @@ public class MessengerMainController  {
 			return "index";
 			// TODO: handle exception
 		}
+		
 		return "index";
 		}
+	
+	@RequestMapping(value = "/addReceiver",method = RequestMethod.GET)
+	public String addRedirect(HttpServletRequest request) {
+		HttpSession session = null;
+		String result = null;
+		try {
+		Optional<UserDetails> userOptional = null;
+		UserDetails user = null;
+	
+		session = request.getSession(false);
+		String username = (String) session.getAttribute("userName");
+		String otp = (String) session.getAttribute("otp");
+		 if(!StringUtils.hasText(username) || !StringUtils.hasText(otp)) {
+			 session.invalidate();
+			 return "index";
+		 }
+		userOptional = regService.getUserById(username);
+		
+		if(userOptional.isPresent()) {
+			user = userOptional.get();
+			if(otp.equals(user.getOtp())) {
+				result = "addReceiver";
+			}else {
+				result = "index";
+			}
+	}
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	@RequestMapping(value = "/rules",method = RequestMethod.GET)
+	public String rules(HttpServletRequest request) {
+		try {
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return "rules";
+	}
 }
