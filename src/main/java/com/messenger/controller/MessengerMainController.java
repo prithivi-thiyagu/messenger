@@ -237,6 +237,7 @@ public class MessengerMainController  {
 	public String logOut(HttpServletRequest request) {
 		HttpSession session = null;
 		try {
+			session = request.getSession(false);
 			session.invalidate();
 		}catch (Exception e) {
 			e.printStackTrace();
