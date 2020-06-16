@@ -18,7 +18,7 @@ public class SMSScheduler {
 	@Autowired
 	private MessengerDao msgrDAO;
 	
-	@Scheduled(cron =  "0 38 19 * * ?")
+	@Scheduled(cron =  "0 45 5 * * ?")
 	public void scheduleMessenger() {
 		Date date = null;
 		Calendar calender = null;
@@ -28,6 +28,7 @@ public class SMSScheduler {
 		SMSHandler smsHandler = null;
 		String message = null;
 		try {
+			System.out.println("Test scheduler*********************");
 			date = new Date();
 			smsHandler = new SMSHandler();
 			calender = Calendar.getInstance();
