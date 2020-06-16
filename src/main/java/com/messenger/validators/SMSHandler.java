@@ -28,6 +28,7 @@ public String sendSMS(String message) {
 		while((line = bufferReader.readLine())!=null) {
 			buffer.append(line).append("\n");
 		}
+		System.out.println("SMS Response -- "+buffer.toString());
 		
 	}catch (Exception e) {
 		// TODO: handle exception
