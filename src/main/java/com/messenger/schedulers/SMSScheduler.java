@@ -18,7 +18,7 @@ public class SMSScheduler {
 	@Autowired
 	private MessengerDao msgrDAO;
 	
-	@Scheduled(cron =  "0 45 5 * * ?")
+	@Scheduled(cron =  "0 35 12 * * ?", zone ="IST")
 	public void scheduleMessenger() {
 		Date date = null;
 		Calendar calender = null;
