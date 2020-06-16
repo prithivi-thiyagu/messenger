@@ -1,6 +1,9 @@
 package com.messenger.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -58,7 +61,7 @@ public class MessengerMainController  {
 		session.setAttribute("otp", otp);
 		session.setMaxInactiveInterval(180);
 		userOptional = regService.getUserById(username);
-		
+		System.out.println( new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()));
 		if(userOptional.isPresent()) {
 			user = userOptional.get();
 			session.setAttribute("senderName", user.getUsername());
